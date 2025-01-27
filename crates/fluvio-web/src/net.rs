@@ -31,8 +31,7 @@ impl TcpDomainConnector for FluvioWebsocketConnector {
         let mut url = Url::parse(&self.url).map_err(|err| {
             IoError::other(format!(
                 "Failed to parse URL on connect. URL: {}. Error: {}",
-                self.url,
-                err.to_string()
+                self.url, err
             ))
         })?;
 

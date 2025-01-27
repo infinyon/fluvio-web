@@ -1,21 +1,18 @@
-use std::time::Duration;
-
-use fluvio::{
-    consumer::{ConsumerConfigBuilder, ConsumerConfigExtBuilder},
-    Offset, TopicProducerConfig, TopicProducerConfigBuilder,
-};
-use leptos::*;
-
-use fluvio_web::{
-    fluvio::FluvioBrowser,
-    leptos_fluvio::{topic_consumer, topic_producer},
-};
-
-use crate::components::count::Count;
-use crate::components::increment_button::IncrementButton;
+use fluvio_web::fluvio::FluvioBrowser;
+use leptos::{component, IntoView};
 
 #[component]
 pub fn Counter(client: FluvioBrowser, topic: String) -> impl IntoView {
+    use std::time::Duration;
+
+    use fluvio::{consumer::ConsumerConfigExtBuilder, Offset, TopicProducerConfigBuilder};
+    use leptos::*;
+
+    use fluvio_web::leptos_fluvio::{topic_consumer, topic_producer};
+
+    use crate::components::count::Count;
+    use crate::components::increment_button::IncrementButton;
+
     let fluvio = client.inner_clone();
 
     let (state, set_state) = create_signal(0);

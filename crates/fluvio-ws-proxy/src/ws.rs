@@ -6,14 +6,14 @@ use tracing::info;
 
 pub(crate) async fn start_web_services(addr: SocketAddr) -> Result<()> {
     info!(ip = %addr.ip(),port = addr.port(),"starting web server at");
-    HttpServer::new(move || App::new().route("/ws/", web::get().to(ws::register)))
+    HttpServer::new(move || App::new().route("/ws/", web::get().to(websocket::register)))
         .bind(addr)?
         .run()
         .await
         .map_err(|err| err.into())
 }
 
-mod ws {
+mod websocket {
     use actix_web::{
         web::{Payload, Query},
         Error, HttpRequest, HttpResponse,
