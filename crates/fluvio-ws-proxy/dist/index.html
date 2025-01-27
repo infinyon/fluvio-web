@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="./" />
+    
+<script type="module" nonce="1G8E4d4YxFtJzqH7qzLCNg==">
+import init, * as bindings from './static/sdf-studio-5727cab523c360a3.js';
+const wasm = await init('./static/sdf-studio-5727cab523c360a3_bg.wasm');
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+    <link rel="stylesheet" href="./static/tailwind-43cbdbf66c147e11.css" integrity="sha384&#x2D;OBv3J&#x2F;D9iWmK87PjSGDEeMf6AOPTDaQfMUO6eH&#x2F;yuPaaGC6nzssfTGYlV&#x2F;3&#x2B;EWEa"/>
+    
+    
+</head>
+
+<body></body>
+
+</html>

@@ -1,0 +1,17 @@
+[build]
+target = "index.html"
+filehash = false
+
+[serve]
+addresses = ["127.0.0.1"]
+port = 7000
+ws_protocol = "ws"
+
+[watch]
+watch = ["../"]
+
+[[proxy]]
+backend = "ws://127.0.0.1:8000/ws/"
+rewrite = "/ws"
+insecure = true
+ws = true

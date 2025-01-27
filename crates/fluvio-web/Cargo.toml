@@ -1,0 +1,26 @@
+[package]
+name = "fluvio-web"
+version = "0.0.0"
+edition = "2021"
+description = "fluvio client in the web"
+
+[lib]
+crate-type = ["cdylib","rlib"]
+
+[features]
+leptos = ["dep:leptos"]
+
+[dependencies]
+anyhow.workspace = true
+async-trait.workspace = true
+futures-util.workspace = true
+http = { workspace = true }
+leptos = { workspace = true, optional = true }
+serde = { workspace = true }
+serde_qs = { workspace = true }
+web-sys = { workspace = true, features = ["Location"]}
+ws_stream_wasm = { workspace = true }
+url = { workspace = true }
+
+fluvio = { workspace = true }
+fluvio-future = { workspace = true, features = ["net", "timer", "sync"]}

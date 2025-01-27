@@ -1,0 +1,22 @@
+[package]
+name = "fluvio-ws-proxy"
+version = "0.0.0"
+edition = "2021"
+description = "Websocket proxy for Fluvio, This will be used to proxy Fluvio socket to browser using WS"
+
+
+
+[dependencies]
+anyhow = { workspace = true }
+async-channel = { workspace = true }
+actix = { workspace = true, features = ["macros"]}
+actix-web = { workspace = true,features = ["macros"] }
+actix-web-actors = { workspace = true }
+ctrlc = { workspace = true }
+futures-util = { version = "0.3.30", default-features = false }
+serde = { workspace = true, features = ["derive"] }
+tokio = { workspace = true, default-features = false, features = ["macros"] }
+tracing = { workspace = true }
+
+fluvio = { workspace = true, default-features = true }
+fluvio-future = { workspace = true, features = ["subscriber","task","timer","tokio1","net","timer","sync"] }

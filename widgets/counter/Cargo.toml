@@ -1,0 +1,29 @@
+[package]
+name = "fluvio-counter"
+version = "0.0.0"
+edition = "2021"
+
+[[bin]]
+name = "counter-wasm"
+path = "src/main.rs"
+doc = false
+
+[dependencies]
+leptos = { workspace = true,  features = ["csr"] }
+leptos_meta = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+custom-element = { workspace = true }
+js-sys = { workspace = true }
+wasm-bindgen = { workspace = true }
+web-sys = { workspace = true, features = [
+	"Window",
+	"Document",
+	"HtmlElement",
+	"CustomElementRegistry",
+] }
+url = { workspace = true }
+
+fluvio = { workspace = true }
+fluvio-web = { workspace = true, features = ["leptos"] }
+
