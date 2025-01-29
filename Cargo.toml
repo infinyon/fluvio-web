@@ -34,16 +34,15 @@ serde_qs = "0.13.0"
 tokio = { version = "1.41.1", default-features = false }
 tracing = "0.1.19"
 url = "2.5.0"
-wasm-bindgen = "=0.2.93"
+wasm-bindgen = "0.2.93"
 wasm-bindgen-futures = "=0.4.42"
 wasm-bindgen-test = "0.3"
-wit-bindgen = { version = "0.35.0", default-features = false }
 web-sys = "0.3.70"
 ws_stream_wasm = "0.7.4"
 
 # fluvio
-fluvio-future = { version = "0.7.0", default-features = false }
-fluvio = { version = "=0.24.2", default-features = false }
+fluvio-future = { version = "0.7.1", default-features = false }
+fluvio = { version = "0.24.4", default-features = false }
 fluvio-protocol = { version = "0.12.0", default-features = false }
 fluvio-types = { version = "0.5.2", default-features = false }
 

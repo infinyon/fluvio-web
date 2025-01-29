@@ -6,6 +6,7 @@ filehash = false
 addresses = ["127.0.0.1"]
 port = 7000
 ws_protocol = "ws"
+no_autoreload = true
 
 [watch]
 watch = ["../"]
