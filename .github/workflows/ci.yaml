@@ -1,6 +1,5 @@
 name: main CI workflow for PR
 
-permissions: read-all
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -47,8 +46,8 @@ jobs:
         run: make clippy
 
 
-  build:
-    name: build
+  build-web:
+    name: Build web lib
     runs-on: ubuntu-latest
 
 
@@ -71,6 +70,32 @@ jobs:
       - name: Build web
         run: make -C crates/fluvio-web build
 
+
+  build-widget:
+    name: Build widget
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: install wasm target
+        run:  rustup target add ${{ env.WASI_TARGET }}
+
+
+      - name: Setup Rust Cache
+        uses: Swatinem/rust-cache@v2
+        timeout-minutes: 10
+
+      - name: install trunk
+        run: cargo binstall trunk
+  
+
       - name: Build widget
         run: make -C widgets/counter build
         
@@ -81,7 +106,8 @@ jobs:
     name: Done
     needs:
       - check
-      - build
+      - build-web
+      - build-widget
     runs-on: ubuntu-latest
     if: always()
     steps:
