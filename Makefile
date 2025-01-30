@@ -1,5 +1,5 @@
 WASM_TARGET = wasm32-unknown-unknown
-RELEASE = v0.2.0
+RELEASE = v0.2.1
 
 fmt:
 	cargo fmt -- --check
