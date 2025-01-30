@@ -46,6 +46,7 @@ impl AppServices {
 
             parsed_query.token
         } else {
+            #[cfg(feature = "leptos")]
             leptos::logging::log!("No query in fluvio conn string");
             None
         };
