@@ -47,6 +47,33 @@ jobs:
         run: make clippy
 
 
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: install wasm target
+        run:  rustup target add ${{ env.WASI_TARGET }}
+
+
+      - name: Setup Rust Cache
+        uses: Swatinem/rust-cache@v2
+        timeout-minutes: 10
+
+      - name: Build web
+        run: make -C crates/fluvio-web build
+
+      - name: Build widget
+        run: make -C widgets/counter build
+        
 
 
   # To satisfy the merge queue check       
@@ -54,6 +81,7 @@ jobs:
     name: Done
     needs:
       - check
+      - build
     runs-on: ubuntu-latest
     if: always()
     steps:
