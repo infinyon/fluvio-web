@@ -32,7 +32,13 @@ pub fn local_websocket_url() -> Result<Url> {
 
 pub fn origin() -> Url {
     let location = current_location();
-    let href = location.origin().unwrap();
+    leptos::logging::log!("location: {:?}", location);
 
-    Url::parse(&href).unwrap()
+    let href = location.origin().unwrap();
+    leptos::logging::log!("href: {}", href);
+
+    let res = Url::parse(&href).unwrap();
+    leptos::logging::log!("result: {:?}", res);
+
+    res
 }
