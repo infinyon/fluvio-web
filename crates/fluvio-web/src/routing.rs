@@ -1,24 +1,26 @@
 use anyhow::{anyhow, Result};
 use http::Uri;
 use url::Url;
-use web_sys::{window, Location};
+use web_sys::window;
 
 pub(crate) fn absolute_url_with_path(path: Uri) -> Result<Url> {
     let location = current_location();
-    let href = location
-        .href()
-        .map_err(|_| anyhow::anyhow!("failed to get href"))?;
 
     let mut url =
-        Url::parse(&href).map_err(|err| anyhow::anyhow!("failed to parse url: {}", err))?;
+        Url::parse(&location).map_err(|err| anyhow::anyhow!("failed to parse url: {}", err))?;
 
     url.set_path(path.to_string().as_str());
     Ok(url)
 }
 
 /// Retrieves the current location from `window` Global Object.
-fn current_location() -> Location {
-    window().expect("failed to get window").location()
+fn current_location() -> String {
+    window()
+        .expect("failed to get window")
+        .document()
+        .expect("failed to get document")
+        .document_uri()
+        .expect("failed to get document uri")
 }
 
 pub fn local_websocket_url() -> Result<Url> {
@@ -34,11 +36,5 @@ pub fn origin() -> Url {
     let location = current_location();
     leptos::logging::log!("location: {:?}", location);
 
-    let href = location.origin().unwrap();
-    leptos::logging::log!("href: {}", href);
-
-    let res = Url::parse(&href).unwrap();
-    leptos::logging::log!("result: {:?}", res);
-
-    res
+    Url::parse(&location).unwrap()
 }
