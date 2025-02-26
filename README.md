@@ -30,7 +30,7 @@ fluvio topic create my-counter
 Then run counter using embedded web server by:
 
 ```
-make -C widget/counter serve
+make -C widgets/counter serve
 ```
 
 Then open browser and navigate to `http://localhost:7000`.  You should see counter widget.  When you click on the button, it will send event to fluvio topic and you should see the count event in the browser.
