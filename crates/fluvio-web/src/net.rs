@@ -68,4 +68,8 @@ impl TcpDomainConnector for FluvioWebsocketConnector {
             ""
         }
     }
+
+    fn clone_box(&self) -> DomainConnector {
+        Box::new(self.clone())
+    }
 }
