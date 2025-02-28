@@ -43,11 +43,8 @@ ws_stream_wasm = "0.7.4"
 # fluvio
 fluvio-future = { version = "0.7.2", default-features = false }
 fluvio = { version = "0.26.1", default-features = false }
-fluvio-protocol = { version = "0.12.1", default-features = false }
-fluvio-types = { version = "0.5.2", default-features = false }
 
 fluvio-web = { path = "crates/fluvio-web" }
-
 
 [profile.wasm-release]
 inherits = "release"
