@@ -9,6 +9,7 @@ crate-type = ["cdylib","rlib"]
 
 [features]
 leptos = ["dep:leptos"]
+compress = ["fluvio/compress"]
 
 [dependencies]
 anyhow.workspace = true

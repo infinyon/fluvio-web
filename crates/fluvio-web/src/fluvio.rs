@@ -1,4 +1,4 @@
-use std::fmt::Debug;
+use std::{fmt::Debug, ops::Deref};
 
 use serde::{Deserialize, Serialize};
 
@@ -156,5 +156,13 @@ impl From<Rc<NativeFluvio>> for FluvioBrowser {
 impl Debug for FluvioBrowser {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("Fluvio").finish()
+    }
+}
+
+impl Deref for FluvioBrowser {
+    type Target = NativeFluvio;
+
+    fn deref(&self) -> &Self::Target {
+        &self.inner
     }
 }
