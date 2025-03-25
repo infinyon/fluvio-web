@@ -10,10 +10,9 @@ use std::rc::Rc;
 use anyhow::{anyhow, Result};
 use url::Url;
 
-use fluvio::{
-    metadata::{objects::ListRequest, topic::TopicSpec},
-    Fluvio as NativeFluvio, FluvioConfig,
-};
+pub use fluvio::metadata::objects::ListRequest;
+pub use fluvio::metadata::topic::TopicSpec;
+pub use fluvio::{Fluvio as NativeFluvio, FluvioAdmin, FluvioConfig};
 
 #[cfg(target_arch = "wasm32")]
 use crate::net::FluvioWebsocketConnector;
