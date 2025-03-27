@@ -93,7 +93,9 @@ impl FluvioBrowser {
 
     #[cfg(not(target_arch = "wasm32"))]
     pub async fn connect(_addr: Url, _config: &FluvioConfig) -> Result<Self> {
-        panic!("Browser fluvio client only supported for wasm targets")
+        panic!(
+            "Browser fluvio client only supported for wasm targets. Uso fluvio-ws crate instead."
+        )
     }
 
     #[cfg(target_arch = "wasm32")]
@@ -119,7 +121,9 @@ impl FluvioBrowser {
         _config: &FluvioConfig,
         _token: String,
     ) -> Result<Self> {
-        panic!("Browser fluvio client only supported for wasm targets")
+        panic!(
+            "Browser fluvio client only supported for wasm targets. Uso fluvio-ws crate instead."
+        )
     }
 
     pub async fn topics(&self) -> Result<Vec<String>> {
