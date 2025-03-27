@@ -19,7 +19,7 @@ http = { workspace = true }
 leptos = { workspace = true, optional = true }
 serde = { workspace = true }
 serde_qs = { workspace = true }
-web-sys = { workspace = true, features = ["Location"]}
+web-sys = { workspace = true, features = ["Location", "Window"]}
 ws_stream_wasm = { workspace = true }
 url = { workspace = true }
 

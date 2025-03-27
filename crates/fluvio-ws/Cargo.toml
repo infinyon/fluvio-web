@@ -1,0 +1,18 @@
+[package]
+name = "fluvio-ws"
+version = "0.0.0"
+edition = "2024"
+description = "fluvio over ws client for non-browser use cases"
+
+[features]
+compress = ["fluvio/compress"]
+
+[dependencies]
+anyhow.workspace = true
+async-tungstenite = { workspace = true, features = ["async-tls", "async-std-runtime", "handshake", "url", "futures-03-sink"] }
+async-trait.workspace = true
+futures-util.workspace = true
+url.workspace = true
+
+fluvio = { workspace = true }
+fluvio-future = { workspace = true, features = ["net", "timer", "sync"]}

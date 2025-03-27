@@ -1,7 +1,8 @@
 # Introduction
 
-
 This repository provides fluvio client that uses WebSocket connection to communicate with Fluvio cluster.  It is intended to be used in browser environment.   This works with websocket proxy server in the fluvio-ws-proxy crate which is intended to be used for debugging and testing purpose.
+
+For non-browser environment, is suggested to use the native Rust client library. Nevertheless, in this repository, using the `fluvio-ws` crate, you can use the WebSocket client in any environment that supports Rust.
 
 # Demo of WebComponent counter
 
