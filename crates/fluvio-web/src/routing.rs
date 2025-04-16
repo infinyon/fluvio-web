@@ -3,7 +3,7 @@ use http::Uri;
 use url::Url;
 use web_sys::{window, Location};
 
-pub(crate) fn absolute_url_with_path(path: Uri) -> Result<Url> {
+pub fn absolute_url_with_path(path: Uri) -> Result<Url> {
     let location = current_location();
     let href = location
         .href()
