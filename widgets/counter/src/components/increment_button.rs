@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use leptos::*;
 
@@ -8,7 +8,7 @@ use crate::components::app::Count;
 
 #[component]
 pub fn IncrementButton(
-    producer: RwSignal<Option<Rc<TopicProducerPool>>>,
+    producer: RwSignal<Option<Arc<TopicProducerPool>>>,
     state: ReadSignal<i32>,
 ) -> impl IntoView {
     view! {
