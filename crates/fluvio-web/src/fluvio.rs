@@ -1,11 +1,11 @@
-use std::{fmt::Debug, ops::Deref};
+use std::fmt::Debug;
+use std::ops::Deref;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
 #[cfg(target_arch = "wasm32")]
 use std::cell::RefCell;
-
-use std::rc::Rc;
 
 use anyhow::{anyhow, Result};
 use url::Url;
@@ -65,7 +65,7 @@ impl AppServices {
 
 #[derive(Clone)]
 pub struct FluvioBrowser {
-    pub inner: Rc<NativeFluvio>,
+    pub inner: Arc<NativeFluvio>,
     cluster_name: String,
 }
 
@@ -83,7 +83,7 @@ impl FluvioBrowser {
         let connector = FluvioWebsocketConnector::new(addr.to_string(), None, None);
 
         let inner =
-            Rc::new(NativeFluvio::connect_with_connector(Box::new(connector), config).await?);
+            Arc::new(NativeFluvio::connect_with_connector(Box::new(connector), config).await?);
 
         Ok(Self {
             inner,
@@ -107,7 +107,7 @@ impl FluvioBrowser {
         let connector = FluvioWebsocketConnector::new(addr.to_string(), Some(token), None);
 
         let inner =
-            Rc::new(NativeFluvio::connect_with_connector(Box::new(connector), config).await?);
+            Arc::new(NativeFluvio::connect_with_connector(Box::new(connector), config).await?);
 
         Ok(Self {
             inner,
@@ -142,13 +142,13 @@ impl FluvioBrowser {
         }
     }
 
-    pub fn inner_clone(&self) -> Rc<NativeFluvio> {
-        self.inner.clone()
+    pub fn inner_clone(&self) -> Arc<NativeFluvio> {
+        Arc::clone(&self.inner)
     }
 }
 
-impl From<Rc<NativeFluvio>> for FluvioBrowser {
-    fn from(inner: Rc<NativeFluvio>) -> Self {
+impl From<Arc<NativeFluvio>> for FluvioBrowser {
+    fn from(inner: Arc<NativeFluvio>) -> Self {
         Self {
             inner,
             cluster_name: "unknown".to_string(),
