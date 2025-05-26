@@ -69,7 +69,7 @@ pub fn topic_consumer(
 
         match stream {
             Ok(consumer) => {
-                let stream_signal = ReadSignal::from_stream(consumer);
+                let stream_signal = ReadSignal::from_stream_unsync(consumer);
                 consumer_signal.set(Some(stream_signal));
             }
             Err(e) => {
