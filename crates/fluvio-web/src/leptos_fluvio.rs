@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
-use leptos::*;
+use leptos::prelude::*;
+use leptos::task::spawn_local;
 use url::Url;
 
 use crate::fluvio::FluvioBrowser;
@@ -14,7 +15,7 @@ use fluvio::{
 pub type ConsumerStreamSignal = ReadSignal<Option<Result<ConsumerRecord, ErrorCode>>>;
 
 pub fn connect_fluvio_client(url: Url) -> RwSignal<Option<FluvioBrowser>> {
-    let client_signal = create_rw_signal::<Option<FluvioBrowser>>(None);
+    let client_signal: RwSignal<Option<FluvioBrowser>> = RwSignal::new(None);
 
     spawn_local(async move {
         let fluvio = super::remote::connect(url).await;
@@ -39,7 +40,7 @@ pub fn topic_producer(
     topic: &str,
     producer_config: TopicProducerConfig,
 ) -> RwSignal<Option<Arc<TopicProducerPool>>> {
-    let producer_signal = create_rw_signal::<Option<Arc<TopicProducerPool>>>(None);
+    let producer_signal: RwSignal<Option<Arc<TopicProducerPool>>> = RwSignal::new(None);
     let topic = topic.to_owned();
 
     spawn_local(async move {
@@ -61,15 +62,14 @@ pub fn topic_consumer(
     fluvio: Arc<Fluvio>,
     config: ConsumerConfigExt,
 ) -> RwSignal<Option<ConsumerStreamSignal>> {
-    let consumer_signal = create_rw_signal::<Option<ConsumerStreamSignal>>(None);
+    let consumer_signal: RwSignal<Option<ConsumerStreamSignal>> = RwSignal::new(None);
 
     spawn_local(async move {
         let stream = fluvio.consumer_with_config(config).await;
 
         match stream {
             Ok(consumer) => {
-                let stream_signal = create_signal_from_stream(consumer);
-
+                let stream_signal = ReadSignal::from_stream(consumer);
                 consumer_signal.set(Some(stream_signal));
             }
             Err(e) => {
