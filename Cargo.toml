@@ -3,7 +3,7 @@ members = [
     "crates/fluvio-web",
     "crates/fluvio-ws",
     "crates/fluvio-ws-proxy",
-    # "widgets/counter",
+    "widgets/counter",
 ]
 
 resolver = "2"
@@ -17,7 +17,7 @@ async-lock = "3.4.0"
 async-stream = "0.3.6"
 async-trait = { version = "0.1.80", default-features = false }
 async-tungstenite = { version = "0.29.1", default-features = false }
-# custom-element = { git = "https://github.com/EstebanBorai/custom-element.git", rev = "1937b98" }
+custom-element = { git = "https://github.com/LeoBorai/custom-element.git", rev = "c13ffa8" }
 anyhow = "1.0.94"
 clap = { version = "4.5.23", default-features = false }
 ctrlc = "3.4.5"
@@ -47,7 +47,6 @@ fluvio-future = { version = "0.7.2", default-features = false }
 fluvio = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.17.3", default-features = false }
 fluvio-protocol = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.17.3", default-features = false }
 fluvio-types = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.17.3", default-features = false }
-
 fluvio-web = { path = "crates/fluvio-web" }
 
 [profile.wasm-release]

@@ -858,6 +858,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "custom-element"
+version = "0.1.4"
+source = "git+https://github.com/LeoBorai/custom-element.git?rev=c13ffa8#c13ffa80ff5b229906c65d6968f34f1ed201e123"
+dependencies = [
+ "js-sys",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
 name = "darling"
 version = "0.20.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1241,6 +1251,23 @@ dependencies = [
  "thiserror 2.0.12",
  "toml",
  "tracing",
+]
+
+[[package]]
+name = "fluvio-counter"
+version = "0.0.0"
+dependencies = [
+ "custom-element",
+ "fluvio",
+ "fluvio-web",
+ "js-sys",
+ "leptos",
+ "leptos_meta",
+ "serde",
+ "serde_json",
+ "url",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
@@ -2237,6 +2264,22 @@ dependencies = [
  "server_fn_macro",
  "syn 2.0.101",
  "uuid",
+]
+
+[[package]]
+name = "leptos_meta"
+version = "0.7.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "448a6387e9e2cccbb756f474a54e36a39557127a3b8e46744b6ef6372b50f575"
+dependencies = [
+ "futures",
+ "indexmap",
+ "leptos",
+ "once_cell",
+ "or_poisoned",
+ "send_wrapper",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
