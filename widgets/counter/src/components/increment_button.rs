@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
-use leptos::*;
+use leptos::prelude::*;
+use leptos::task::spawn_local;
 
 use fluvio::{RecordKey, TopicProducerPool};
 

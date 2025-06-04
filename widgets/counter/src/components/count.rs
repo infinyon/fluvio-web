@@ -1,5 +1,6 @@
+use leptos::prelude::*;
+
 use fluvio_web::leptos_fluvio::ConsumerStreamSignal;
-use leptos::*;
 
 use crate::components::app::Count;
 
