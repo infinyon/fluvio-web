@@ -45,7 +45,7 @@ impl TcpDomainConnector for FluvioWebsocketConnector {
 
         let (mut _ws, wsstream) = WsMeta::connect(url.clone(), None)
             .await
-            .map_err(|e| IoError::new(std::io::ErrorKind::Other, e))?;
+            .map_err(IoError::other)?;
 
         let wsstream_io = wsstream.into_io();
         let (stream, sink) = wsstream_io.split();

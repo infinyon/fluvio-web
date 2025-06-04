@@ -1,6 +1,7 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
-use leptos::*;
+use leptos::prelude::*;
+use leptos::task::spawn_local;
 use url::Url;
 
 use crate::fluvio::FluvioBrowser;
@@ -14,7 +15,7 @@ use fluvio::{
 pub type ConsumerStreamSignal = ReadSignal<Option<Result<ConsumerRecord, ErrorCode>>>;
 
 pub fn connect_fluvio_client(url: Url) -> RwSignal<Option<FluvioBrowser>> {
-    let client_signal = create_rw_signal::<Option<FluvioBrowser>>(None);
+    let client_signal: RwSignal<Option<FluvioBrowser>> = RwSignal::new(None);
 
     spawn_local(async move {
         let fluvio = super::remote::connect(url).await;
@@ -35,11 +36,11 @@ pub fn connect_fluvio_client(url: Url) -> RwSignal<Option<FluvioBrowser>> {
 }
 
 pub fn topic_producer(
-    fluvio: Rc<Fluvio>,
+    fluvio: Arc<Fluvio>,
     topic: &str,
     producer_config: TopicProducerConfig,
-) -> RwSignal<Option<Rc<TopicProducerPool>>> {
-    let producer_signal = create_rw_signal::<Option<Rc<TopicProducerPool>>>(None);
+) -> RwSignal<Option<Arc<TopicProducerPool>>> {
+    let producer_signal: RwSignal<Option<Arc<TopicProducerPool>>> = RwSignal::new(None);
     let topic = topic.to_owned();
 
     spawn_local(async move {
@@ -47,7 +48,7 @@ pub fn topic_producer(
             .topic_producer_with_config(topic, producer_config)
             .await
         {
-            Ok(producer) => producer_signal.set(Some(Rc::new(producer))),
+            Ok(producer) => producer_signal.set(Some(Arc::new(producer))),
             Err(e) => {
                 leptos::logging::error!("Failed to create producer: {:?}", e);
             }
@@ -58,18 +59,17 @@ pub fn topic_producer(
 }
 
 pub fn topic_consumer(
-    fluvio: Rc<Fluvio>,
+    fluvio: Arc<Fluvio>,
     config: ConsumerConfigExt,
 ) -> RwSignal<Option<ConsumerStreamSignal>> {
-    let consumer_signal = create_rw_signal::<Option<ConsumerStreamSignal>>(None);
+    let consumer_signal: RwSignal<Option<ConsumerStreamSignal>> = RwSignal::new(None);
 
     spawn_local(async move {
         let stream = fluvio.consumer_with_config(config).await;
 
         match stream {
             Ok(consumer) => {
-                let stream_signal = create_signal_from_stream(consumer);
-
+                let stream_signal = ReadSignal::from_stream_unsync(consumer);
                 consumer_signal.set(Some(stream_signal));
             }
             Err(e) => {

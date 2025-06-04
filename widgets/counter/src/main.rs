@@ -34,7 +34,7 @@ impl Counter {
             }
         };
 
-        leptos::mount_to(instance.clone(), || {
+        let _ = leptos::prelude::mount_to(instance.clone(), || {
             view! {
                 <App fluvio_websocket_url=fluvio_url topic />
             }
