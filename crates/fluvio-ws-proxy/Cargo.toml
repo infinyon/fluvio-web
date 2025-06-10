@@ -19,4 +19,4 @@ tokio = { workspace = true, default-features = false, features = ["macros"] }
 tracing = { workspace = true }
 
 fluvio = { workspace = true, default-features = true }
-fluvio-future = { workspace = true, features = ["subscriber","task","timer","tokio1","net","timer","sync"] }
+fluvio-future = { workspace = true, features = ["subscriber","task","timer","net","timer"] }
