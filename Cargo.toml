@@ -43,11 +43,11 @@ web-sys = "0.3.77"
 ws_stream_wasm = "0.7.4"
 
 # fluvio
-fluvio-future = { version = "0.8.1", default-features = false }
+fluvio-future = { version = "0.8.2", default-features = false }
 
-fluvio = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.18.0", default-features = false }
-fluvio-protocol = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.18.0", default-features = false }
-fluvio-types = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.18.0", default-features = false }
+fluvio = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.18.1-dev-2", default-features = false }
+fluvio-protocol = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.18.1-dev-2", default-features = false }
+fluvio-types = { git = "https://github.com/infinyon/fluvio.git", tag = "v0.18.1-dev-2", default-features = false }
 fluvio-web = { path = "crates/fluvio-web" }
 
 [profile.wasm-release]
