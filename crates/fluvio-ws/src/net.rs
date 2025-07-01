@@ -37,19 +37,16 @@ impl TcpDomainConnector for FluvioWebsocketConnector {
 
         match (&self.domain, &self.token) {
             (Some(domain), Some(token)) => {
-                url.set_query(Some(&format!(
-                    "token={}&domain={}&addr={}",
-                    token, domain, addr
-                )));
+                url.set_query(Some(&format!("token={token}&domain={domain}&addr={addr}")));
             }
             (Some(domain), None) => {
-                url.set_query(Some(&format!("domain={}&addr={}", domain, addr)));
+                url.set_query(Some(&format!("domain={domain}&addr={addr}")));
             }
             (None, Some(token)) => {
-                url.set_query(Some(&format!("token={}&addr={}", token, addr)));
+                url.set_query(Some(&format!("token={token}&addr={addr}")));
             }
             (None, None) => {
-                url.set_query(Some(&format!("addr={}", addr)));
+                url.set_query(Some(&format!("addr={addr}")));
             }
         }
 
