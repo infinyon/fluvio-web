@@ -21,7 +21,7 @@ pub fn Counter(client: FluvioBrowser, topic: String) -> impl IntoView {
         Err(e) => {
             return view! {
                 <div>
-                    <h1>{format!("Failed to create producer: {:?}", e)}</h1>
+                    <h1>{format!("Failed to create producer: {e:?}")}</h1>
                 </div>
             }
             .into_any();
